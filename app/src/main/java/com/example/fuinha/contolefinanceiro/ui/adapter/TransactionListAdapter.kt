@@ -1,13 +1,15 @@
 package com.example.fuinha.contolefinanceiro.ui.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import com.example.fuinha.contolefinanceiro.R
 import com.example.fuinha.contolefinanceiro.enums.TransactionType
+import com.example.fuinha.contolefinanceiro.extension.limitTo
+import com.example.fuinha.contolefinanceiro.extension.toBRL
 import com.example.fuinha.contolefinanceiro.extension.toBrDate
 import com.example.fuinha.contolefinanceiro.models.Transaction
 import kotlinx.android.synthetic.main.transacao_item.view.*
@@ -20,19 +22,20 @@ import kotlinx.android.synthetic.main.transacao_item.view.*
 
 class TransactionListAdapter(var transactions: List<Transaction>,
                              val context: Context) : BaseAdapter() {
+    @SuppressLint("NewApi")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val v = LayoutInflater.from(context).inflate(R.layout.transacao_item, parent, false)
         val t = transactions[position]
-        v.transacao_valor.text = t.value.toString()
-        v.transacao_categoria.text = t.category
+        v.transacao_valor.text = t.value.toBRL()
+        v.transacao_categoria.text = t.category.limitTo(14)
 
         v.transacao_data.text = t.date.toBrDate()
         if (t.type == TransactionType.Credit) {
             v.transacao_icone.setImageResource(R.drawable.icone_transacao_item_receita)
-            v.transacao_valor.setTextColor(Color.BLUE)
+            v.transacao_valor.setTextColor(context.getColor(R.color.receita))
         } else {
             v.transacao_icone.setImageResource(R.drawable.icone_transacao_item_despesa)
-            v.transacao_valor.setTextColor(Color.RED)
+            v.transacao_valor.setTextColor(context.getColor(R.color.despesa))
         }
 
 
