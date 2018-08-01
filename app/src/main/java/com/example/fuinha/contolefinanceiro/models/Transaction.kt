@@ -2,6 +2,7 @@ package com.example.fuinha.contolefinanceiro.models
 
 import com.example.fuinha.contolefinanceiro.enums.TransactionType
 import java.math.BigDecimal
+import java.util.Calendar
 
 /**
  * This file was created by Fuinha on 31/07/2018.
@@ -11,4 +12,5 @@ import java.math.BigDecimal
 
 class Transaction(val value: BigDecimal,
                   val type: TransactionType,
-                  var name: String)
+                  var category: String,
+                  val date: Calendar = Calendar.getInstance())

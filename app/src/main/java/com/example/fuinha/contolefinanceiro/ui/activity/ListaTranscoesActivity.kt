@@ -8,6 +8,7 @@ import com.example.fuinha.contolefinanceiro.models.Transaction
 import com.example.fuinha.contolefinanceiro.ui.adapter.TransactionListAdapter
 import kotlinx.android.synthetic.main.activity_lista_transacoes.*
 import java.math.BigDecimal
+import java.util.*
 
 /**
 * This file was created by Fuinha on 30/07/2018.
@@ -24,6 +25,6 @@ class ListaTranscoesActivity : AppCompatActivity() {
                 Transaction(BigDecimal.valueOf(50.0), TransactionType.Debit, "Conta"))
 
         val adapter = TransactionListAdapter(list, this)
-        lista_transacoes_listview.setAdapter(adapter)
+        lista_transacoes_listview.adapter = adapter
     }
 }
